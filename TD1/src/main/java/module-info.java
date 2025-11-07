@@ -1,7 +1,7 @@
-module birds.ensisa {
+module ensisa.birds {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens birds.ensisa to javafx.fxml;
-    exports birds.ensisa;
+    opens ensisa.birds to javafx.fxml;
+    exports ensisa.birds;
 }

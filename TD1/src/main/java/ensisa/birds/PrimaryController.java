@@ -1,4 +1,4 @@
-package birds.ensisa;
+package ensisa.birds;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

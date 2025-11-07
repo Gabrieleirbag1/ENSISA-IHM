@@ -1,4 +1,4 @@
-package birds.ensisa;
+package ensisa.birds;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
