@@ -1,19 +1,42 @@
 package ensisa.lines;
 
 import ensisa.lines.model.Document;
+import ensisa.lines.model.DrawTool;
 import ensisa.lines.model.LinesEditor;
 import ensisa.lines.model.StraightLine;
+import ensisa.lines.tools.Tool;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 public class MainController {
     private final Document document;
     private LinesEditor linesEditor;
+    private final ObjectProperty<Tool> currentTool;
+
     @FXML
     public Pane editorPane;
 
+    @FXML
+    private void mousePressedInEditor(MouseEvent event) {
+        getCurrentTool().mousePressed(event);
+    }
+
+    @FXML
+    private void mouseDraggedInEditor(MouseEvent event) {
+        getCurrentTool().mouseDragged(event);
+    }
+
+    @FXML
+    private void mouseReleasedInEditor(MouseEvent event) {
+        getCurrentTool().mouseReleased(event);
+    }
+
     public MainController() {
+        currentTool = new SimpleObjectProperty<>(new DrawTool(this));
         document = new Document();
     }
 
@@ -47,5 +70,17 @@ public class MainController {
 
     public LinesEditor getLinesEditor() {
         return linesEditor;
+    }
+
+    public ObjectProperty<Tool> currentToolProperty() {
+        return currentTool;
+    }
+
+    public Tool getCurrentTool() {
+        return currentTool.get();
+    }
+
+    public void setCurrentTool(Tool currentTool) {
+        this.currentTool.set(currentTool);
     }
 }
