@@ -104,4 +104,14 @@ public class MainController {
     public void setCurrentTool(Tool currentTool) {
         this.currentTool.set(currentTool);
     }
+
+    @FXML
+    private void mouseEntered(MouseEvent event) {
+        getCurrentTool().mouseEntered(event);
+    }
+
+    @FXML
+    void mouseExited(MouseEvent event) {
+        getCurrentTool().mouseExited(event);
+    }
 }

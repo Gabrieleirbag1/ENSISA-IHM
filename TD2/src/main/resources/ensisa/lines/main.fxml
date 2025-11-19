@@ -33,6 +33,6 @@
       </MenuBar>
    </top>
    <center>
-      <Pane fx:id="editorPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+      <Pane fx:id="editorPane" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
