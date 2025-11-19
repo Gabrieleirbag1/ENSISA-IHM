@@ -5,12 +5,14 @@ import ensisa.lines.model.DrawTool;
 import ensisa.lines.model.LinesEditor;
 import ensisa.lines.model.StraightLine;
 import ensisa.lines.tools.Tool;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public class MainController {
     private final Document document;
@@ -40,8 +42,14 @@ public class MainController {
         document = new Document();
     }
 
+    @FXML
+    private void quitMenuAction() {
+        Platform.exit();
+    }
+
     public void initialize() {
         linesEditor = new LinesEditor(editorPane);
+        setClipping();
         observeDocument();
         StraightLine l = new StraightLine();
         l.setStartX(10);
@@ -49,6 +57,19 @@ public class MainController {
         l.setEndX(300);
         l.setEndY(60);
         document.getLines().add(l);
+    }
+
+    private void setClipping() {
+        final Rectangle clip = new Rectangle();
+        editorPane.setClip(clip);
+        editorPane.layoutBoundsProperty().addListener((v, oldValue, newValue) -> {
+            clip.setWidth(newValue.getWidth());
+            clip.setHeight(newValue.getHeight());
+        });
+    }
+
+    public Document getDocument() {
+        return document;
     }
 
     private void observeDocument() {
