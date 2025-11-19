@@ -10,6 +10,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -18,6 +19,12 @@ public class MainController {
     private final Document document;
     private LinesEditor linesEditor;
     private final ObjectProperty<Tool> currentTool;
+
+    @FXML
+    private RadioButton selectToolButton;
+
+    @FXML
+    private RadioButton drawToolButton;
 
     @FXML
     public Pane editorPane;
@@ -105,6 +112,14 @@ public class MainController {
         this.currentTool.set(currentTool);
     }
 
+    private void initializeToolPalette() {
+        // Change style class to not paint the round button
+        selectToolButton.getStyleClass().remove("radio-button");
+        selectToolButton.getStyleClass().add("toggle-button");
+        drawToolButton.getStyleClass().remove("radio-button");
+        drawToolButton.getStyleClass().add("toggle-button");
+    }
+
     @FXML
     private void mouseEntered(MouseEvent event) {
         getCurrentTool().mouseEntered(event);
@@ -113,5 +128,13 @@ public class MainController {
     @FXML
     void mouseExited(MouseEvent event) {
         getCurrentTool().mouseExited(event);
+    }
+
+    @FXML
+    private void selectToolAction() {
+    }
+
+    @FXML
+    private void drawToolAction() {
     }
 }
